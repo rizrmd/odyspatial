@@ -1,0 +1,20 @@
+name: "Charissa"
+tags:
+  - "5 Rooms"
+  - "Japandi"
+  - "Muji"
+  - "Modern"
+desc: "Singapoeran HDB urban living."
+type: 'Residential'
+location: 'BATOK WEST AVE, Singapore'
+year: '2024'
+size: '12.5m x 9.5m'
+est_hours: 34
+est_days: 5
+services_used: 
+  - "Floor Plan"
+  - "Electrical Plan"
+  - "Carpentry Detail"
+  - "Finishing Plan"
+  - "3D Interior"
+  - "3D Rendering"

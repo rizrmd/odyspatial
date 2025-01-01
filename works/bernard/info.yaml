@@ -1,0 +1,20 @@
+name: "Bernard"
+tags:
+  - "4 Rooms"
+  - "Japandi"
+  - "Wabisabi"
+  - "Modern Farmhouse"
+desc: "Singapoeran Condo Wabisabi."
+type: 'Residential'
+location: 'Bukit Batok East-Avenue 2, Singapore'
+year: '2024'
+size: '12.5m x 9.5m'
+est_hours: 34
+est_days: 5
+services_used: 
+  - "Floor Plan"
+  - "Electrical Plan"
+  - "Carpentry Detail"
+  - "Finishing Plan"
+  - "3D Interior"
+  - "3D Rendering"

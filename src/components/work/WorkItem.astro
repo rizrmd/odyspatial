@@ -11,7 +11,7 @@ const { work, img, slug } = Astro.props;
     {
       img && (
         <a href={`/project/${slug}`}>
-          <Image src={img()} width="1000" alt={work.name + ' - 1'} />
+          <Image src={img()} class="h-[230px] object-cover" height="460" alt={work.name + ' - 1'} />
         </a>
       )
     }

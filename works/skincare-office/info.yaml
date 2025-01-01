@@ -1,0 +1,20 @@
+name: "Skincare Office"
+tags:
+  - "Office"
+  - "Modern"
+  - "Minimalist"
+  - "Pop Culture"
+desc: "Indonesian Office."
+type: 'Office'
+location: 'Surabaya, Indonesia'
+year: '2024'
+size: '20m x 20m'
+est_hours: 34
+est_days: 5
+services_used: 
+  - "Floor Plan"
+  - "Electrical Plan"
+  - "Carpentry Detail"
+  - "Finishing Plan"
+  - "3D Interior"
+  - "3D Rendering"

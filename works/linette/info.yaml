@@ -1,0 +1,20 @@
+name: "Dexter"
+tags:
+  - "5 Room Resale"
+  - "Modern"
+  - "Scandinavian"
+  - "Japandi"
+desc: "Singapoeran HDB Urban Living."
+type: 'Residential'
+location: 'BT BATOK WEST AVE 8, Singapore'
+year: '2024'
+size: '12.5m x 12m'
+est_hours: 34
+est_days: 5
+services_used: 
+  - "Floor Plan"
+  - "Electrical Plan"
+  - "Carpentry Detail"
+  - "Finishing Plan"
+  - "3D Interior"
+  - "3D Rendering"
