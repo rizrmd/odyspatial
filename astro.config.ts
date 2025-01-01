@@ -15,5 +15,5 @@ export default defineConfig({
       }
     : undefined,
   integrations: [tailwind(), compress(), react()],
-  site: 'https://odyspatial.pro',
+  site: 'https://ody-spatial.pro',
 });
