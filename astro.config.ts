@@ -9,8 +9,11 @@ const is_win = process.platform === 'win32';
 export default defineConfig({
   devToolbar: { enabled: false },
   compressHTML: true,
-  image: is_win ? {
-    service: passthroughImageService()
-  } : undefined,
+  image: is_win
+    ? {
+        service: passthroughImageService(),
+      }
+    : undefined,
   integrations: [tailwind(), compress(), react()],
+  site: 'https://ody-spatial.pro',
 });
