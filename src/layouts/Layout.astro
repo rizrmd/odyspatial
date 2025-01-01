@@ -76,16 +76,13 @@ const { description, title } = Astro.props;
             p(cal, ar);
           };
       })(window, 'https://app.cal.com/embed/embed.js', 'init');
-      Cal('init', '30min', { origin: 'https://cal.com' });
+      Cal('init', 'consultation', { origin: 'https://cal.com' });
 
-      Cal.ns['30min']('floatingButton', {
-        calLink: 'ody-spatial/30min',
+      Cal.ns.consultation('floatingButton', {
+        calLink: 'ody-spatial/consultation',
         config: { layout: 'month_view' },
-        buttonText: 'Book Me Now',
-        buttonPosition: 'bottom-right',
-        hideButtonIcon: false,
       });
-      Cal.ns['30min']('ui', { hideEventTypeDetails: false, layout: 'month_view' });
+      Cal.ns.consultation('ui', { hideEventTypeDetails: false, layout: 'month_view' });
     </script>
     <!-- Cal floating-popup embed code ends -->
     <script>
