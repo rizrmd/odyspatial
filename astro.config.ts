@@ -13,4 +13,6 @@ export default defineConfig({
     service: passthroughImageService()
   } : undefined,
   integrations: [tailwind(), compress(), react()],
+  site: 'https://rizrmd.github.io',
+  base: 'odyspatial',
 });
