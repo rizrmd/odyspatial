@@ -5,6 +5,7 @@ const colors = require('tailwindcss/colors');
 module.exports = {
   darkMode: 'class',
   content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
+  plugins: [require('tailwindcss-motion')],
   theme: {
     colors: {
       current: 'currentColor',
@@ -13,7 +14,8 @@ module.exports = {
       primary: colors.stone,
     },
     fontFamily: {
-      sans: ['Inter', 'sans-serif'],
+      sans: ['Plus Jakarta Sans',  'sans-serif'],
+      hero: ['Italiana',  'serif'],
     },
     fontSize: {
       xs: ['0.75rem', '1rem'],
