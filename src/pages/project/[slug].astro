@@ -38,9 +38,9 @@ const info = [
   ['Location', 'Jakarta, Indonesia'],
   ['Year', '2021'],
   ['Type', 'Residential'],
-  ['Size', '20m x 30m'],
+  ['Size', work.size],
   ['Service Used', work.services_used],
-  ['Work Duration', `12 Work Hour ~ 3 Days`],
+  ['Work Duration', `${work.est_hours} Work Hour ~ ${work.est_days} Days`],
 ];
 ---
 
@@ -83,7 +83,7 @@ const info = [
               })
             }
           </div>
-          <div class="flex min-w-[35%] flex-col gap-5 px-4 lg:px-0">
+          <div class="flex max-w-[35%] flex-1 flex-col gap-5 px-4 lg:px-0">
             <h2
               class="mb-5 flex items-center space-x-5 text-3xl font-medium tracking-tight sm:text-4xl"
             >
@@ -95,19 +95,23 @@ const info = [
                 return (
                   <div class="flex flex-col">
                     <div class="text-sm font-bold uppercase">{key}</div>
-                    <div class="flex gap-2">
-                      {typeof value === 'object' && Array.isArray(value)
-                        ? value.map((e) => {
+                    <div class="flex ">
+                      {typeof value === 'object' && Array.isArray(value) ? (
+                        <div class="flex flex-wrap gap-2 pt-2">
+                          {value.map((e) => {
                             return (
                               <a
                                 href={`/tag/${slugify(e)}`}
-                                class="my-2 border border-primary-950 px-2 transition-all hover:bg-primary-950 hover:text-white"
+                                class="border border-primary-950 px-2 transition-all hover:bg-primary-950 hover:text-white"
                               >
                                 {e}
                               </a>
                             );
-                          })
-                        : value}
+                          })}
+                        </div>
+                      ) : (
+                        value
+                      )}
                     </div>
                   </div>
                 );

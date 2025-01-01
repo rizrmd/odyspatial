@@ -1,16 +1,19 @@
-name: 'WILSQ'
+name: "WILSQ"
 tags:
-  - '3 Rooms'
-  - 'Japandi'
-  - 'Wabisabi'
-  - 'Modern Farmhouse'
-desc: 'Singapoeran HDB urban living.'
+  - "3 Rooms"
+  - "Japandi"
+  - "Wabisabi"
+  - "Modern Farmhouse"
+desc: "Singapoeran HDB urban living."
 images:
-  - 'wilsq/01.png'
-est_hours: 35
+  - "wilsq/01.png"
+size: '20m x 30m'
+est_hours: 34
 est_days: 5
 services_used: 
-  - 'Design'
-  - 'Styling'
-  - 'Sourcing'
-  - 'Installation'
+  - "Floor Plan"
+  - "Electrical Plan"
+  - "Carpentry Detail"
+  - "Finishing Plan"
+  - "3D Interior"
+  - "3D Rendering"
