@@ -1,0 +1,39 @@
+---
+import { Image } from 'astro:assets';
+import { getCollection } from 'astro:content';
+import slugify from 'slugify';
+
+const { work, img, slug } = Astro.props;
+---
+
+<div class="flex flex-col gap-12 border">
+  <div class="flex flex-col items-stretch gap-4">
+    {
+      img && (
+        <a href={`/project/${slug}`}>
+          <Image src={img()} width="1000" alt={work.name + ' - 1'} />
+        </a>
+      )
+    }
+    <div class="flex flex-col items-stretch space-y-3 px-6 pb-8 pt-4">
+      <a class="flex flex-col space-y-3" href={`/project/${slug}`}>
+        <h3 class="text-3xl font-bold">{work.name}</h3>
+        <p>{work.desc}</p>
+      </a>
+      <div class="flex select-none flex-wrap text-base sm:text-lg">
+        {
+          work.tags.map((e) => {
+            return (
+              <a
+                href={`/tag/${slugify(e)}`}
+                class="mb-1 mr-1 cursor-pointer border border-primary-950 px-2 transition-all hover:bg-primary-950 hover:text-white"
+              >
+                {e}
+              </a>
+            );
+          })
+        }
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,121 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import { Image } from 'astro:assets';
+import slugify from 'slugify';
+
+import type { ImageMetadata } from 'astro';
+const images = import.meta.glob<{ default: ImageMetadata }>('/works/**/*.{jpeg,jpg,png}');
+
+export async function getStaticPaths() {
+  const works = await getCollection('works');
+
+  return works.map((work) => ({
+    params: {
+      slug: work.id.split('/').shift()?.split('.').shift(),
+    },
+  }));
+}
+
+const { slug } = Astro.params;
+const works = await getCollection('works', (work) => {
+  if (work.id.split('/').shift()?.split('.').shift() === slug) {
+    return work;
+  }
+});
+const work = works[0].data;
+
+const img = {
+  hero: images[`/works/${work.images[0]}`](),
+  shots: [
+    images[`/works/${work.images[0]}`](),
+    images[`/works/${work.images[0]}`](),
+    images[`/works/${work.images[0]}`](),
+  ],
+};
+
+const info = [
+  ['Location', 'Jakarta, Indonesia'],
+  ['Year', '2021'],
+  ['Type', 'Residential'],
+  ['Size', '20m x 30m'],
+  ['Service Used', work.services_used],
+  ['Work Duration', `12 Work Hour ~ 3 Days`],
+];
+---
+
+<Layout description={`Our Works · ${work.name}`} title={`ODY Spatial · ${work.name}`}>
+  <div class="min-h-screen flex-1 border-t border-primary-300 pt-[25px]">
+    <div class="mx-auto max-w-2xl lg:max-w-7xl lg:px-8">
+      <div class="flex flex-col items-stretch gap-4">
+        <div class="flex flex-col items-baseline gap-5 px-4 lg:flex-row lg:px-0">
+          <h1 class="font-hero text-6xl font-bold leading-[1em]">{work.name}</h1>
+          <h2 class="">{work.desc}</h2>
+        </div>
+        <div class="flex select-none flex-wrap px-4 text-base sm:text-lg lg:px-0">
+          {
+            work.tags.map((e) => {
+              return (
+                <a
+                  href={`/tag/${slugify(e)}`}
+                  class="mb-1 mr-1 cursor-pointer border border-primary-950 px-2 transition-all hover:bg-primary-950 hover:text-white"
+                >
+                  {e}
+                </a>
+              );
+            })
+          }
+        </div>
+
+        <Image
+          src={img.hero}
+          alt={work.name + ' - Main'}
+          class="h-[calc(100vh-250px)] object-cover"
+        />
+
+        <div class="flex flex-col-reverse gap-10 pt-6 lg:flex-row">
+          <div class="flex flex-1 flex-col gap-4">
+            {
+              img.shots.map((e, idx) => {
+                return (
+                  <Image src={e} alt={work.name + ' - Shot ' + (idx + 1)} class="object-cover" />
+                );
+              })
+            }
+          </div>
+          <div class="flex min-w-[35%] flex-col gap-5 px-4 lg:px-0">
+            <h2
+              class="mb-5 flex items-center space-x-5 text-3xl font-medium tracking-tight sm:text-4xl"
+            >
+              <div>Overview</div>
+              <div class="flex-1 border-2 opacity-50"></div>
+            </h2>
+            {
+              info.map(([key, value]) => {
+                return (
+                  <div class="flex flex-col">
+                    <div class="text-sm font-bold uppercase">{key}</div>
+                    <div class="flex gap-2">
+                      {typeof value === 'object' && Array.isArray(value)
+                        ? value.map((e) => {
+                            return (
+                              <a
+                                href={`/tag/${slugify(e)}`}
+                                class="my-2 border border-primary-950 px-2 transition-all hover:bg-primary-950 hover:text-white"
+                              >
+                                {e}
+                              </a>
+                            );
+                          })
+                        : value}
+                    </div>
+                  </div>
+                );
+              })
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</Layout>

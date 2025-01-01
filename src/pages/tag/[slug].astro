@@ -1,0 +1,70 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import slugify from 'slugify';
+
+export async function getStaticPaths() {
+  const works = await getCollection('works');
+  const tags = new Set();
+
+  for (const work of works) {
+    for (const tag of work.data.tags) {
+      tags.add(slugify(tag));
+    }
+
+    for (const tag of work.data.services_used) {
+      tags.add(slugify(tag));
+    }
+  }
+
+  return [...tags].map((tag) => ({
+    params: {
+      slug: tag,
+    },
+  }));
+}
+
+const { slug } = Astro.params;
+
+const works = await getCollection('works', (work) => {
+  if (work.data.tags.map((e) => slugify(e)).includes(slug as string)) {
+    return work;
+  }
+
+  if (work.data.services_used.map((e) => slugify(e)).includes(slug as string)) {
+    return work;
+  }
+});
+
+import type { ImageMetadata } from 'astro';
+import WorkItem from '../../components/work/WorkItem.astro';
+const images = import.meta.glob<{ default: ImageMetadata }>('/works/**/*.{jpeg,jpg,png}');
+---
+
+<Layout
+  description={`Our Works · Showing all projects with tag: ${slug}`}
+  title={`ODY Spatial · Projects with tag: ${slug}`}
+>
+  <section class="">
+    <div class="mx-auto max-w-2xl lg:max-w-7xl lg:px-8">
+      <div class="flex flex-col gap-5">
+        <div class="flex items-center space-x-3">
+          <div>Viewing all projects with tag:</div>
+          <span
+            class="mb-1 mr-1 cursor-pointer border border-primary-950 bg-primary-950 p-2 text-white transition-all"
+            >{slug}</span
+          >
+        </div>
+        <div class="grid gap-8 lg:grid-cols-3">
+          {
+            works.map(({ data: work, id }) => {
+              const img = images[`/works/${work.images[0]}`];
+              const slug = id.split('/').shift()?.split('.').shift();
+              return <WorkItem slug={slug} img={img} work={work} />;
+            })
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
