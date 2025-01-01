@@ -58,9 +58,15 @@ const images = import.meta.glob<{ default: ImageMetadata }>('/works/**/*.{jpeg,j
         <div class="grid gap-8 lg:grid-cols-3">
           {
             works.map(({ data: work, id }) => {
-              const img = images[`/works/${work.images[0]}`];
-              const slug = id.split('/').shift()?.split('.').shift();
+            const slug = id.split('/').shift()?.split('.').shift();
+            const img_path = Object.keys(images).find((e: string) => {
+              return e.startsWith(`/works/${slug}`);
+            });
+            if (img_path) {
+              const img = images[img_path];
               return <WorkItem slug={slug} img={img} work={work} />;
+            }
+            return null;
             })
           }
         </div>

@@ -25,19 +25,25 @@ const works = await getCollection('works', (work) => {
 });
 const work = works[0].data;
 
+const work_images = Object.keys(images)
+  .filter((e: string) => {
+    return e.startsWith(`/works/${slug}`);
+  })
+  .map((e) => {
+    return images[e];
+  });
+
 const img = {
-  hero: images[`/works/${work.images[0]}`](),
-  shots: [
-    images[`/works/${work.images[0]}`](),
-    images[`/works/${work.images[0]}`](),
-    images[`/works/${work.images[0]}`](),
-  ],
+  hero: work_images[0](),
+  shots: work_images.slice(1).map((e) => {
+    return e();
+  }),
 };
 
 const info = [
-  ['Location', 'Jakarta, Indonesia'],
-  ['Year', '2021'],
-  ['Type', 'Residential'],
+  ['Location', work.location],
+  ['Year', work.year],
+  ['Type', work.type],
   ['Size', work.size],
   ['Service Used', work.services_used],
   ['Work Duration', `${work.est_hours} Work Hour ~ ${work.est_days} Days`],

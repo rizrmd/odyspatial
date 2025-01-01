@@ -1,12 +1,11 @@
 ---
-import { Image } from 'astro:assets';
 import { getCollection } from 'astro:content';
-import slugify from 'slugify';
 const works = await getCollection('works');
 
 import type { ImageMetadata } from 'astro';
 import WorkItem from '../work/WorkItem.astro';
 const images = import.meta.glob<{ default: ImageMetadata }>('/works/**/*.{jpeg,jpg,png}');
+
 ---
 
 <section id="our-works" class="mt-[20px] min-h-screen bg-primary-100 py-16 sm:py-20 lg:mt-[100px]">
@@ -19,9 +18,15 @@ const images = import.meta.glob<{ default: ImageMetadata }>('/works/**/*.{jpeg,j
       <div class="grid gap-8 lg:grid-cols-3">
         {
           works.map(({ data: work, id }) => {
-            const img = images[`/works/${work.images[0]}`];
             const slug = id.split('/').shift()?.split('.').shift();
-            return <WorkItem slug={slug} img={img} work={work} />;
+            const img_path = Object.keys(images).find((e: string) => {
+              return e.startsWith(`/works/${slug}`);
+            });
+            if (img_path) {
+              const img = images[img_path];
+              return <WorkItem slug={slug} img={img} work={work} />;
+            }
+            return null;
           })
         }
       </div>

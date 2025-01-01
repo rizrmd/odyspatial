@@ -5,8 +5,9 @@ tags:
   - "Wabisabi"
   - "Modern Farmhouse"
 desc: "Singapoeran HDB urban living."
-images:
-  - "wilsq/01.png"
+type: 'Residential'
+location: 'Jakarta, Indonesia'
+year: '2021'
 size: '20m x 30m'
 est_hours: 34
 est_days: 5
