@@ -1,11 +1,11 @@
 ---
 import { getCollection } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
-import { Image } from 'astro:assets';
+import { getImage, Image } from 'astro:assets';
 import slugify from 'slugify';
 
 import type { ImageMetadata } from 'astro';
-import LightBox from '../../components/react/LightBox';
+import LightBox from '../../components/react/LightBox.astro';
 const images = import.meta.glob<{ default: ImageMetadata }>('/works/**/*.{jpeg,jpg,png}');
 
 export async function getStaticPaths() {
@@ -43,6 +43,12 @@ const img = {
   }),
 };
 
+const fetched_images = await Promise.all(
+  work_images.map(async (e) => {
+    return await getImage({ src: e });
+  })
+);
+
 const info = [
   ['Location', work.location],
   ['Year', work.year],
@@ -76,22 +82,26 @@ const info = [
           }
         </div>
 
-        <LightBox client:only image={img.hero} images={work_images}>
-          <Image
-            src={img.hero}
-            alt={work.name + ' - Main'}
-            class="h-[calc(100vh-250px)] object-cover"
-          />
-        </LightBox>
+        <LightBox
+          src={img.hero}
+          images={work_images}
+          images={fetched_images}
+          alt={work.name + ' - Main'}
+          className="h-[calc(100vh-250px)] object-cover"
+        />
 
         <div class="flex flex-col-reverse gap-10 pt-6 lg:flex-row">
           <div class="flex flex-1 flex-col gap-4">
             {
               img.shots.map((e, idx) => {
                 return (
-                  <LightBox client:only image={e} images={work_images}>
-                    <Image src={e} alt={work.name + ' - Shot ' + (idx + 1)} class="object-cover" />
-                  </LightBox>
+                  <LightBox
+                    src={e}
+                    images={work_images}
+                    images={fetched_images}
+                    alt={work.name + ' - Shot ' + (idx + 1)}
+                    class="object-cover"
+                  />
                 );
               })
             }

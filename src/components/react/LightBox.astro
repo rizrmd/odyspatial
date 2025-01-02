@@ -1,0 +1,26 @@
+---
+import type { GetImageResult, ImageMetadata } from 'astro';
+import { getImage } from 'astro:assets';
+import LightBoxReact from './LightBoxReact';
+
+const { src, alt, className, width, height, images } = Astro.props as {
+  src: ImageMetadata;
+  alt: string;
+  className: string;
+  width?: number;
+  height?: number;
+  images: GetImageResult[];
+};
+
+const fetched = await getImage({ src, width, height });
+---
+
+<LightBoxReact client:only image={fetched} images={images}>
+  <img
+    src={fetched.src}
+    alt={alt + ' | ODY spatial'}
+    class={className}
+    width={width}
+    height={height}
+  />
+</LightBoxReact>

@@ -1,16 +1,17 @@
-import type { ImageMetadata } from 'astro';
+import type { GetImageResult, ImageMetadata } from 'astro';
 import { css } from 'goober';
 import { useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { getImage } from 'astro:assets';
-export default function LightBox({
+
+export default function LightBoxReact({
   children,
   image,
   images,
 }: {
   children: any;
-  image: ImageMetadata;
-  images?: ImageMetadata[];
+  image: GetImageResult;
+  images?: GetImageResult[];
 }) {
   const w = window as unknown as {
     touch_anim_preview: number;
@@ -56,8 +57,7 @@ export default function LightBox({
         `}
         onClick={async () => {
           local.open = true;
-          local.img = await getImage({ src: image });
-          local.w = image.width;
+          local.img = image;
           local.pos = images?.findIndex((e) => e.src === image.src) || 0;
 
           const cal = document.querySelector('cal-floating-button') as HTMLDivElement;
@@ -95,7 +95,7 @@ export default function LightBox({
                 @media (max-width: 768px) {
                   & img {
                     height: 100vh;
-                    width: ${local.w}px;
+                    width: ${local.img.options.width!}px;
                     max-height: none;
                     max-width: none;
                   }
@@ -169,8 +169,7 @@ export default function LightBox({
                     if (local.pos < 0) local.pos = (images?.length || 0) - 1;
                     const img = images?.[local.pos];
                     if (img) {
-                      local.img = await getImage({ src: img });
-                      local.w = img.width;
+                      local.img = img;
                     }
                     render();
                   }}
@@ -194,8 +193,7 @@ export default function LightBox({
                     if (local.pos > (images?.length || 0) - 1) local.pos = 0;
                     const img = images?.[local.pos];
                     if (img) {
-                      local.img = await getImage({ src: img });
-                      local.w = img.width;
+                      local.img = img;
                     }
                     render();
                   }}

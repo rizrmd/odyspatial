@@ -3,7 +3,7 @@ import { Image } from 'astro:assets';
 
 import hero_a from '../../../public/assets/home/hero-a.png';
 import hero_b from '../../../public/assets/home/hero-b.png';
-import LightBox from '../react/LightBox';
+import LightBox from '../react/LightBox.astro';
 ---
 
 <section class="">
@@ -13,23 +13,19 @@ import LightBox from '../react/LightBox';
         class="flex flex-col space-y-[2em] lg:h-[calc(100vh-120px)] lg:max-h-[580px] lg:flex-row lg:space-y-0"
       >
         <div class="flex flex-1 flex-col">
-          <LightBox client:only image={hero_a}>
-            <Image
-              alt={'Open Kithcen Living Room A - ODY Spatial'}
-              src={hero_a}
-              width={1000}
-              class="h-[calc(50vh-80px)] max-h-[300px] flex-1 object-cover"
-            />
-          </LightBox>
+          <LightBox
+            alt={'Open Kithcen Living Room A - ODY Spatial'}
+            src={hero_a}
+            width={1000}
+            className="h-[calc(50vh-80px)] max-h-[300px] flex-1 object-cover"
+          />
 
-          <LightBox client:only image={hero_b}>
-            <Image
-              alt={'Open Kithcen Living Room B - ODY Spatial'}
-              src={hero_b}
-              width={1000}
-              class="mt-5 h-[calc(50vh-80px)] max-h-[300px] flex-1 object-cover"
-            />
-          </LightBox>
+          <LightBox
+            alt={'Open Kithcen Living Room A - ODY Spatial'}
+            src={hero_a}
+            width={1000}
+            className="mt-5 h-[calc(50vh-80px)] max-h-[300px] flex-1 object-cover"
+          />
         </div>
         <div class="flex flex-1 items-center px-[20px] lg:justify-center lg:px-0">
           <h1
