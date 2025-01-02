@@ -2,7 +2,7 @@ import type { ImageMetadata } from 'astro';
 import { css } from 'goober';
 import { useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
-
+import { getImage } from 'astro:assets';
 export default function LightBox({
   children,
   image,
@@ -21,7 +21,8 @@ export default function LightBox({
     mx: 0,
     pos: 0,
     show_nav: false,
-    img: image,
+    img: null as unknown as Awaited<ReturnType<typeof getImage>>,
+    w: 0,
     ival: null as any,
     div: null as unknown as HTMLDivElement,
     loading_text: [
@@ -53,9 +54,10 @@ export default function LightBox({
         className={css`
           cursor: pointer;
         `}
-        onClick={() => {
+        onClick={async () => {
           local.open = true;
-          local.img = image;
+          local.img = await getImage({ src: image });
+          local.w = image.width;
           local.pos = images?.findIndex((e) => e.src === image.src) || 0;
 
           const cal = document.querySelector('cal-floating-button') as HTMLDivElement;
@@ -93,7 +95,7 @@ export default function LightBox({
                 @media (max-width: 768px) {
                   & img {
                     height: 100vh;
-                    width: ${local.img.width}px;
+                    width: ${local.w}px;
                     max-height: none;
                     max-width: none;
                   }
@@ -142,7 +144,7 @@ export default function LightBox({
                 }
               }}
               className={cx('motion-preset-slide-up-sm select-none')}
-              src={`/_image?href=${local.img.src}&w=${local.img.width}&f=webp`}
+              src={local.img.src}
             />
             {local.loading && (
               <div
@@ -158,14 +160,18 @@ export default function LightBox({
               <>
                 <div
                   className="fixed bottom-0 left-0 w-[80px] px-[10px] pb-[30px] text-white"
-                  onClick={(e) => {
+                  onClick={async (e) => {
                     e.stopPropagation();
                     e.preventDefault();
 
                     local.loading = true;
                     local.pos = local.pos - 1;
                     if (local.pos < 0) local.pos = (images?.length || 0) - 1;
-                    if (images?.[local.pos]) local.img = images?.[local.pos];
+                    const img = images?.[local.pos];
+                    if (img) {
+                      local.img = await getImage({ src: img });
+                      local.w = img.width;
+                    }
                     render();
                   }}
                 >
@@ -179,14 +185,18 @@ export default function LightBox({
 
                 <div
                   className="fixed bottom-0 right-0 w-[80px] px-[10px] pb-[30px] text-white"
-                  onClick={(e) => {
+                  onClick={async (e) => {
                     e.stopPropagation();
                     e.preventDefault();
 
                     local.loading = true;
                     local.pos = local.pos + 1;
                     if (local.pos > (images?.length || 0) - 1) local.pos = 0;
-                    if (images?.[local.pos]) local.img = images?.[local.pos];
+                    const img = images?.[local.pos];
+                    if (img) {
+                      local.img = await getImage({ src: img });
+                      local.w = img.width;
+                    }
                     render();
                   }}
                 >
