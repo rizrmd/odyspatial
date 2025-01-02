@@ -6,6 +6,7 @@ import '@fontsource/plus-jakarta-sans/latin-800.css';
 import { ClientRouter } from 'astro:transitions';
 import Header from '../components/layout/Header.astro';
 import Cal from '../components/react/Cal';
+import Footer from '../components/layout/Footer.astro';
 
 interface Props {
   description: string;
@@ -36,7 +37,7 @@ const { description, title } = Astro.props;
     <main>
       <slot />
     </main>
-    <!-- <Footer /> -->
+    <Footer />
     <style is:global>
       [x-cloak] {
         display: none !important;
