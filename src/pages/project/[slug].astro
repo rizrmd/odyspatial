@@ -1,10 +1,11 @@
 ---
 import { getCollection } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
-import { Image } from 'astro:assets';
+import { Image, imageConfig } from 'astro:assets';
 import slugify from 'slugify';
 
 import type { ImageMetadata } from 'astro';
+import LightBox from '../../components/react/LightBox';
 const images = import.meta.glob<{ default: ImageMetadata }>('/works/**/*.{jpeg,jpg,png}');
 
 export async function getStaticPaths() {
@@ -25,18 +26,20 @@ const works = await getCollection('works', (work) => {
 });
 const work = works[0].data;
 
-const work_images = Object.keys(images)
-  .filter((e: string) => {
-    return e.startsWith(`/works/${slug}`);
-  })
-  .map((e) => {
-    return images[e];
-  });
+const work_images = await Promise.all(
+  Object.keys(images)
+    .filter((e: string) => {
+      return e.startsWith(`/works/${slug}`);
+    })
+    .map(async (e) => {
+      return (await images[e]()).default;
+    })
+);
 
 const img = {
-  hero: work_images[0](),
+  hero: work_images[0],
   shots: work_images.slice(1).map((e) => {
-    return e();
+    return e;
   }),
 };
 
@@ -73,23 +76,27 @@ const info = [
           }
         </div>
 
-        <Image
-          src={img.hero}
-          alt={work.name + ' - Main'}
-          class="h-[calc(100vh-250px)] object-cover"
-        />
+        <LightBox client:only image={img.hero} images={work_images}>
+          <Image
+            src={img.hero}
+            alt={work.name + ' - Main'}
+            class="h-[calc(100vh-250px)] object-cover"
+          />
+        </LightBox>
 
         <div class="flex flex-col-reverse gap-10 pt-6 lg:flex-row">
           <div class="flex flex-1 flex-col gap-4">
             {
               img.shots.map((e, idx) => {
                 return (
-                  <Image src={e} alt={work.name + ' - Shot ' + (idx + 1)} class="object-cover" />
+                  <LightBox client:only image={e} images={work_images}>
+                    <Image src={e} alt={work.name + ' - Shot ' + (idx + 1)} class="object-cover" />
+                  </LightBox>
                 );
               })
             }
           </div>
-          <div class="flex lg:max-w-[35%] flex-1 flex-col gap-5 px-4 lg:px-0">
+          <div class="flex flex-1 flex-col gap-5 px-4 lg:max-w-[35%] lg:px-0">
             <h2
               class="mb-5 flex items-center space-x-5 text-3xl font-medium tracking-tight sm:text-4xl"
             >

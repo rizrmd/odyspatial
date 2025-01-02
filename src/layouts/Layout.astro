@@ -1,11 +1,11 @@
 ---
-import '@fontsource/plus-jakarta-sans/latin-800.css';
-import '@fontsource/plus-jakarta-sans/latin-500.css';
 import '@fontsource/italiana';
 import '@fontsource/plus-jakarta-sans/latin-300.css';
-import { ViewTransitions } from 'astro:transitions';
-import Footer from '../components/layout/Footer.astro';
+import '@fontsource/plus-jakarta-sans/latin-500.css';
+import '@fontsource/plus-jakarta-sans/latin-800.css';
+import { ClientRouter } from 'astro:transitions';
 import Header from '../components/layout/Header.astro';
+import Cal from '../components/react/Cal';
 
 interface Props {
   description: string;
@@ -27,7 +27,7 @@ const { description, title } = Astro.props;
     <meta name="generator" content={Astro.generator} />
     <meta name="description" content={description} />
     <title>{title}</title>
-    <ViewTransitions />
+    <ClientRouter />
   </head>
   <body
     class="bg-primary-50 text-primary-950 antialiased transition dark:bg-primary-950 dark:text-primary-200"
@@ -42,49 +42,7 @@ const { description, title } = Astro.props;
         display: none !important;
       }
     </style>
-    <!-- Cal floating-popup embed code begins -->
-    <script type="text/javascript">
-      (function (C, A, L) {
-        let p = function (a, ar) {
-          a.q.push(ar);
-        };
-        let d = C.document;
-        C.Cal =
-          C.Cal ||
-          function () {
-            let cal = C.Cal;
-            let ar = arguments;
-            if (!cal.loaded) {
-              cal.ns = {};
-              cal.q = cal.q || [];
-              d.head.appendChild(d.createElement('script')).src = A;
-              cal.loaded = true;
-            }
-            if (ar[0] === L) {
-              const api = function () {
-                p(api, arguments);
-              };
-              const namespace = ar[1];
-              api.q = api.q || [];
-              if (typeof namespace === 'string') {
-                cal.ns[namespace] = cal.ns[namespace] || api;
-                p(cal.ns[namespace], ar);
-                p(cal, ['initNamespace', namespace]);
-              } else p(cal, ar);
-              return;
-            }
-            p(cal, ar);
-          };
-      })(window, 'https://app.cal.com/embed/embed.js', 'init');
-      Cal('init', 'consultation', { origin: 'https://cal.com' });
-
-      Cal.ns.consultation('floatingButton', {
-        calLink: 'ody-spatial/consultation',
-        config: { layout: 'month_view' },
-      });
-      Cal.ns.consultation('ui', { hideEventTypeDetails: false, layout: 'month_view' });
-    </script>
-    <!-- Cal floating-popup embed code ends -->
+    <Cal client:load />
     <script>
       import Alpine from 'alpinejs';
       import collapse from '@alpinejs/collapse';
