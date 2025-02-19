@@ -1,0 +1,22 @@
+name: "Singapore HDB Malay Style"
+tags:
+  - "HDB"
+  - "Malay"
+  - "Modern"
+  - "Traditional"
+  - "Renovation"
+desc: "Modern HDB renovation incorporating traditional Malay design elements, creating a perfect blend of contemporary functionality with cultural aesthetics for a Singapore home."
+type: "Residential"
+location: "Singapore"
+year: "2024"
+size: "12m x 7.5m"
+est_hours: 80
+est_days: 14
+services_used:
+  - "Floor Plan"
+  - "Electrical Plan"
+  - "Carpentry Detail"
+  - "Finishing Plan"
+  - "3D Interior"
+  - "3D Rendering"
+  - "Material Selection"

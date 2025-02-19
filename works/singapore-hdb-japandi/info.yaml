@@ -1,0 +1,20 @@
+name: "Singaporean HDB Japandi"
+tags:
+  - "HDB"
+  - "Japandi"
+  - "Modern"
+  - "Minimalist"
+desc: "Modern Japandi-style Interior Design for Singapore HDB"
+type: "Residential"
+location: "Singapore"
+year: "2024"
+size: "12.5m x 9.5m"
+est_hours: 40
+est_days: 6
+services_used:
+  - "Floor Plan"
+  - "Electrical Plan"
+  - "Carpentry Detail"
+  - "Finishing Plan"
+  - "3D Interior"
+  - "3D Rendering"

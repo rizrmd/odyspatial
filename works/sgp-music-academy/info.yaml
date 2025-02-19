@@ -1,0 +1,24 @@
+name: "SGP Music Academy"
+tags:
+  - "Music School"
+  - "Educational"
+  - "Interior Design"
+  - "Commercial"
+  - "Modern"
+  - "Acoustic Design"
+desc: "Modern Interior Design for SGP Music Academy featuring specialized acoustic treatment and purpose-built music rooms"
+type: "Educational"
+location: "Orchard Road, Singapore"
+year: "2024"
+size: "250 sqm"
+est_hours: 60
+est_days: 8
+services_used:
+  - "Floor Plan"
+  - "Electrical Plan"
+  - "Acoustic Treatment Design"
+  - "Room Layout Planning"
+  - "3D Interior"
+  - "3D Rendering"
+  - "Material Selection"
+  - "Lighting Design"

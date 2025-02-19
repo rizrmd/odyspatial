@@ -1,0 +1,17 @@
+name: "Kitchen Renovation HDB"
+tags:
+  - "HDB"
+  - "Kitchen"
+  - "Modern"
+  - "Renovation"
+desc: "Kitchen Renovation HDB Singapore"
+type: "Residential"
+location: "Singapore"
+year: "2024"
+size: "15 sqm"
+est_hours: 30
+est_days: 5
+services_used:
+  - "Floor Plan"
+  - "3D Interior"
+  - "3D Rendering"
