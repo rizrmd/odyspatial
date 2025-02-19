@@ -17,7 +17,7 @@ tags:
   - Malaysia
   - Interior Design
 location: Johor Bahru, Malaysia
-year: 2024
+year: "2024"
 status: Completed
 featured: true
 layout: ../../layouts/ProjectLayout.astro
