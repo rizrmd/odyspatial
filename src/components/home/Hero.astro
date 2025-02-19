@@ -1,35 +1,26 @@
 ---
 import { Image } from 'astro:assets';
-
-import hero_a from '../../../public/assets/home/hero-a.png';
-import hero_b from '../../../public/assets/home/hero-b.png';
 import LightBox from '../react/LightBox.astro';
 ---
 
 <section class="">
   <div class="mx-auto max-w-2xl lg:max-w-7xl lg:px-8">
     <div class="flex flex-col gap-16">
-      <div
-        class="flex flex-col space-y-[2em] lg:h-[calc(100vh-120px)] lg:max-h-[580px] lg:flex-row lg:space-y-0"
-      >
-        <div class="flex flex-1 flex-col">
-          <LightBox
-            alt={'Open Kithcen Living Room A - ODY Spatial'}
-            src={hero_a}
-            width={1000}
-            className="h-[calc(50vh-80px)] max-h-[300px] flex-1 object-cover"
-          />
-
-          <LightBox
-            alt={'Open Kithcen Living Room A - ODY Spatial'}
-            src={hero_a}
-            width={1000}
-            className="mt-5 h-[calc(50vh-80px)] max-h-[300px] flex-1 object-cover"
-          />
+      <div class="flex flex-col space-y-[2em]">
+        <div class="w-full aspect-video">
+          <iframe
+            width="100%"
+            height="100%"
+            src="https://www.youtube.com/embed/i-vJM9RIQgo"
+            title="ODY Spatial Video"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen
+            class="w-full h-full"
+          ></iframe>
         </div>
-        <div class="flex flex-1 items-center px-[20px] lg:justify-center lg:px-0">
+        <div class="flex flex-1 items-center justify-center px-[20px] lg:px-0">
           <h1
-            class="flex flex-col items-start font-hero text-[4em] uppercase leading-[1.1em] lg:text-[6em]"
+            class="flex flex-col items-center font-hero text-[4em] uppercase leading-[1.1em] lg:text-[6em]"
           >
             <div class="motion-preset-slide-left motion-delay-100">Transform</div>
             <div class="motion-preset-slide-left motion-delay-300">Your Space</div>
@@ -37,7 +28,7 @@ import LightBox from '../react/LightBox.astro';
             <div class="motion-preset-slide-left motion-delay-700">Dreams</div>
           </h1>
         </div>
-      </div> 
+      </div>
     </div>
   </div>
 </section>
